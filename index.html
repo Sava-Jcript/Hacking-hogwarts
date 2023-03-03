@@ -12,16 +12,36 @@
     <h1>Students of Hogwartz
     </h1>
     
+    <p>
+
+      <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
+      <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
+      
+      <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
+      <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
+      <button class="filter" data-action="filter" data-filter="*">All students</button>
+
+    </p>
+    
+
     <table id="list">
       <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Second Name </th>
-          <th>Middle Name</th>
-          <th>Nickname</th>
-          <th>Photo</th>
-          <th>House</th>
+      
+        <tr id="sorting">
+          <th data-action="sort" data-sort-direction="asc" data-sort="first">First Name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="last">Family Name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="middle">Middle Name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="nickName">Nickname</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="nickName">Photo</th> <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
         </tr>
+      
+      
+      
+      
+      
+      
+      
+      
       </thead>
       <tbody>
         <!-- animal template will be copied and inserted here -->

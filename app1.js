@@ -36,7 +36,8 @@ function start( ) {
 // ---------------------- CONTROLLER -----------------
 
 function triggerButtons(){
-    document.querySelectorAll(".filter").forEach((each) =>{each.addEventListener("click", selectFilter)});
+    document.querySelectorAll(".filter").forEach((each) =>{each.addEventListener("click", selectFilter)})
+  ;
     
     document.querySelectorAll("[data-action=sort]").forEach((each) =>{each.addEventListener("click", sortClick)});
 }
@@ -69,7 +70,7 @@ function filterList(filteredList) {
       filteredList = allStudents;
     }
     return filteredList;
-    
+
   }
 
 
@@ -78,14 +79,17 @@ function filterList(filteredList) {
 
 
 // function filterList(){
-//     const filteredList=allStudents.filter(isRaven); 
+//     let filteredList=allStudents.filter(isRaven); 
 // displayList(filteredList);
 // }
 
 // function isRaven (student){
 
-//     return student.type==="Hufflepuff"; 
+//     return student.house === "Slytherin"; 
 // }
+
+
+
 // function filterList(filteredList){
 
 //     if (settings.filterBy !== "*") {

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Animals (objects)</title>
+    <link rel="stylesheet" href="./style.css"></link>
+
+  </head>
+  <body>
+    <h1>Students of Hogwartz
+    </h1>
+    
+    <table id="list">
+      <thead>
+        <tr>
+
+
+         
+
+         
+          <th><button class="filter" data-action="filter" data-filter="cat">First Name</button></th>
+         
+          <th>  <button class="filter" data-action="filter" data-filter="cat">Middle Name</button> </th>
+          <th>  <button class="filter" data-action="filter" data-filter="cat">Nickname</button</th>
+
+
+          <th>          <button class="filter" data-action="filter" data-filter="cat">Nickname</button>
+          </th>
+
+
+          <th>          <button class="filter" data-action="filter" data-filter="cat">Photo</button>
+</th>
+
+
+          <th>          <button class="filter" data-action="filter" data-filter="cat">House</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- animal template will be copied and inserted here -->
+        
+      </tbody>
+    </table>
+
+    <template id="Studentz">
+      <tr>
+        <td data-field="firstname">FirstName</td>
+        <td data-field="secondname">SecondName</td>
+        <td data-field="middle">Middlename</td>
+        <td data-field="nick">Nickname</td>
+        <td data-field="image"><img id="studentImage" src="" /></td>
+        <td data-field="house">House</td>
+      </tr>
+    </template>
+    
+    <script src="app.js"></script>
+  </body>
+</html>
