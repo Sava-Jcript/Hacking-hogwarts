@@ -37,6 +37,7 @@ function start( ) {
 
 function triggerButtons(){
     document.querySelectorAll(".filter").forEach((each) =>{each.addEventListener("click", selectFilter)})
+
   ;
     
     document.querySelectorAll("[data-action=sort]").forEach((each) =>{each.addEventListener("click", sortClick)});
@@ -45,17 +46,28 @@ function triggerButtons(){
 
 // --- Filtering ----
 function selectFilter(event){
-    const filter = event.target.dataset.filter;
-   //filterList(filter);
-   setFilter(filter);
+    const filter1 = event.target.dataset.filter;
+   
+   setFilter(filter1);
 
 }
 
-function setFilter(filter){
-    settings.filterBy = filter;
+function setFilter(filter1){
+    settings.filterBy = filter1;
     buildList();
+ 
 
 }
+
+// let house = jsonObject.house;
+//     let houseName = "";
+//     let houseTrim = house.trim();
+//     //* console.log(houseTrim);
+
+//     houseName = houseTrim.substring();
+    
+//     houseName=houseName.charAt(0).toUpperCase() + houseName.slice(1).toLowerCase(); 
+//     Student.house=houseName; 
 
 
 
@@ -154,9 +166,9 @@ function sortList(sortedList){
     
      sortedList = sortedList.sort(sortByInput);
      
-      function sortByInput(animalA, animalB){
+      function sortByInput(StudentA, StudentB){
         // console.log(`sorted by ${settings.sortBy}`)
-        if(animalA[settings.sortBy]   < animalB[settings.sortBy]){
+        if(StudentA[settings.sortBy]   < StudentB[settings.sortBy]){
             return -1 * direction;
         }else{
             return 1 * direction;
@@ -178,18 +190,18 @@ async function loadJSON() {
     prepareObjects(jsonData);
 }
 
-function prepareObjects( inputData ) {
-    allStudents = inputData.map(preapareObject);
-    buildList();
-}
+// function prepareObjects( inputData ) {
+//     allStudents = inputData.map(preapareObject);
+//     buildList();
+// }
 
 
     
 
 
 
-function prepareObjects( jsonData ) {
-    jsonData.forEach( jsonObject => {
+function prepareObjects( jsonObject ) {
+    jsonObject.forEach( jsonObject => {
         const Student = Object.create(Students);
         // let text = jsonObject.fullname;
         let fullName = jsonObject.fullname; 
@@ -354,13 +366,15 @@ allStudents.push(Student);
           
 
 
-
-        // TODO: Create new object with cleaned data - and store that in the allStudents array
+ 
+  // TODO: Create new object with cleaned data - and store that in the allStudents array
         
         // TODO: MISSING CODE HERE !!!
     });
 
-    displayList();
+   
+    
+    buildList();
    
 }
 
@@ -377,12 +391,12 @@ function buildList() {
 }
 
 
-function displayList() {
+function displayList(aStudent) {
     // clear the list
     document.querySelector("#list tbody").innerHTML = "";
 
     // build a new list
-    allStudents.forEach( displayStudent );
+    aStudent.forEach(displayStudent);
 }
 
 function displayStudent(student) {
@@ -413,3 +427,97 @@ function displayStudent(student) {
 
 
 
+
+
+
+
+
+
+
+
+
+function tryToMakeAWinner(selectedStudent){
+    const winners = allStudents.filter(student => student.winner)
+    const numberOfWinners = winners.length;
+    const other = winners.filter(student => student.type === selectedStudent.type ).shift();
+    // if there is another of the same type
+    if (other !== undefined){
+        console.log("there can only be one winner of each type!");
+        removeOther(other);
+    } else if (numberOfWinners >= 2){
+        console.log("there can only be two winners");
+        removeAorB(winners[0], winners[1]);
+    } else {
+        makeWinner(selectedStudent);
+    }
+
+    makeWinner(selectedStudent);
+
+    function removeOther(other){
+    // show name on button
+    document.querySelector("#onlyonekind p button span").textContent =`${other.name}, the ${other.type}`;
+
+    // ask the user to ignore or remove the other
+    document.querySelector("#onlyonekind").classList.remove("hide");
+    document.querySelector("#onlyonekind .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#onlyonekind p button").addEventListener("click", clickRemoveOther);
+    // if ignore, do nothing (remove the event listeneras good practice)
+    function closeDialog(){
+    document.querySelector("#onlyonekind").classList.add("hide");
+    document.querySelector("#onlyonekind .closebutton").removeEventListener("click", closeDialog);
+    document.querySelector("#onlyonekind p button").removeEventListener("click", clickRemoveOther);
+    }
+
+    function clickRemoveOther(){
+    removeWinner(other);
+    makeWinner(selectedStudent);
+    buildList();
+    closeDialog();
+    }
+    }
+    
+    function removeAorB(winnerA, winnerB){
+    // show names on buttons
+    document.querySelector("#onlytwowinners [data-action=remove1] span").textContent =`${winnerA.name}, the ${winnerA.type}`;
+    document.querySelector("#onlytwowinners [data-action=remove2] span").textContent = `${winnerB.name}, the ${winnerB.type}`;
+
+    // ask the user to ignore or remove 'A or B
+    document.querySelector("#onlytwowinners").classList.remove("hide");
+    document.querySelector("#onlytwowinners .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#onlytwowinners [data-action=remove1]").addEventListener("click", clickRemoveA);
+    document.querySelector("#onlytwowinners [data-action=remove2]").addEventListener("click", clickRemoveB);
+
+    // if ignore, do nothing
+    function closeDialog(){
+        document.querySelector("#onlytwowinners").classList.add("hide");
+    document.querySelector("#onlytwowinners .closebutton").removeEventListener("click", closeDialog);
+    document.querySelector("#onlytwowinners [data-action=remove1]").removeEventListener("click", clickRemoveA);
+    document.querySelector("#onlytwowinners [data-action=remove2]").removeEventListener("click", clickRemoveB);
+    }
+
+    function clickRemoveA(){
+        removeWinner(winnerA);
+        makeWinner(selectedStudent);
+        buildList();
+        closeDialog();
+    }
+
+    function clickRemoveB(){
+    // else - if removeB
+    removeWinner(winnerB);
+    makeWinner(selectedStudent);
+    buildList();
+    closeDialog();
+    }
+     
+}
+
+function removeWinner(winnerStudent){
+    console.log("remove winner");
+    winnerStudent.winner = false;
+}
+
+function makeWinner(student){
+    student.winner = true;
+}
+}
