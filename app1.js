@@ -404,11 +404,11 @@ function displayStudent(student) {
     const clone = document.querySelector("template#Studentz").content.cloneNode(true);
 
     // set clone data
-    clone.querySelector("[data-field=firstname]").textContent = student.first;
-    clone.querySelector("[data-field=secondname]").textContent = student.last;
-    clone.querySelector("[data-field=nick]").textContent = student.nickName;
+    clone.querySelector("[data-field=firstname]").textContent = "First Name : "+student.first;
+    clone.querySelector("[data-field=secondname]").textContent = "Family Name : "+student.last;
+    clone.querySelector("[data-field=nick]").textContent = "Nickname: "+student.nickName;
     clone.querySelector("[data-field=middle]").textContent = student.middle;
-    clone.querySelector("[data-field=house]").textContent = student.house;
+    clone.querySelector("[data-field=house]").textContent = "House: " +student.house;
   
     // clone.querySelector("[data-field=Image]").src= student.image.src;
 
@@ -521,3 +521,8 @@ function makeWinner(student){
     student.winner = true;
 }
 }
+
+
+
+
+

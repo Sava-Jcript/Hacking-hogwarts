@@ -1,0 +1,22 @@
+#container {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  #list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    display: inline-block;
+    padding: 10px;
+    background-color: #eee;
+    margin: 5px;
+  }
+  
+  #buttons {
+    margin-top: 20px;
+  }
+  
