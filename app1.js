@@ -16,7 +16,8 @@ const Students = {
     image:"",
     type: "",
     star: false,
-    winner: false
+    winner: false,
+    blood:""
 }; 
 const settings = {
     filterBy: "*",
@@ -25,7 +26,7 @@ const settings = {
 }
 
 function start( ) {
-    console.log("ready");
+    console.log("fuck");
 
     loadJSON();
     triggerButtons();
@@ -184,11 +185,29 @@ function sortList(sortedList){
 
 
 async function loadJSON() {
-    const response = await fetch("https://petlatkea.dk/2021/hogwarts/students.json");
-    const jsonData = await response.json();
+    let [response1, response2] = await Promise.all([
+        fetch("https://petlatkea.dk/2021/hogwarts/students.json").then(response => response.json()),
+        fetch("https://petlatkea.dk/2021/hogwarts/families.json").then(response => response.json())
+      ]);
+      
+  
+      console.log("wtf");
+
     // when loaded, prepare data objects
-    prepareObjects(jsonData);
+    prepareObjects(response1, response2);
+ 
+
+
+
+
+
+
+
+
 }
+
+
+
 
 // function prepareObjects( inputData ) {
 //     allStudents = inputData.map(preapareObject);
@@ -200,10 +219,15 @@ async function loadJSON() {
 
 
 
-function prepareObjects( jsonObject ) {
+function prepareObjects( jsonObject,jsonObject1 ) {
     jsonObject.forEach( jsonObject => {
         const Student = Object.create(Students);
         // let text = jsonObject.fullname;
+
+       
+
+
+        
         let fullName = jsonObject.fullname; 
 
        let firstnameResult = "";
@@ -308,6 +332,23 @@ let house = jsonObject.house;
 
 
 
+    let gender = jsonObject.gender;
+    let genderName = "";
+    let genderTrim = gender.trim();
+    //* console.log(houseTrim);
+
+    genderName = genderTrim.substring();
+    
+    genderName=genderName.charAt(0).toUpperCase() + genderName.slice(1).toLowerCase(); 
+    Student.gender=genderName; 
+    // console.log(houseName); 
+
+
+
+
+
+
+
 let image="";
     let imageSrc = new Image(100, 100);
 
@@ -325,11 +366,6 @@ if (lastName.includes(" ")) {
 const secondName = words[1]; 
     let firstnameCap = firstnameResult.charAt(0).toLowerCase();
     
-
-
-
-
-
     imageSrc.src = "images/" + secondName + "_" + firstnameCap + ".png" ;
 }
 
@@ -341,6 +377,16 @@ else if (lastName.includes("Patil")) {
     let firstnameL = firstnameResult.toLowerCase();
     imageSrc.src = "images/" + lastnameL + "_" + firstnameL + ".png" ;
 }
+
+else if (firstnameResult.includes("Leanne")) {
+    
+   
+    
+
+  
+    imageSrc.src = "/fb.jpeg" ;
+}
+
 else{
 
     let firstnameL = firstnameResult.charAt(0).toLowerCase();
@@ -353,12 +399,19 @@ else{
 Student.image=imageSrc; 
     // Pushes the objects into the array
 
+    console.log(jsonObject1
+        );
 
+  
 
+    let bloodType = "";
+    if ((jsonObject1.half).includes(lastName)) {
+        bloodType = "Half";
+      } else {
+        bloodType = "Pure";
+      }
 
-
-
-
+    Student.blood = bloodType;
 
 
 
@@ -367,18 +420,35 @@ allStudents.push(Student);
 
 
  
-  // TODO: Create new object with cleaned data - and store that in the allStudents array
-        
-        // TODO: MISSING CODE HERE !!!
+
+
     });
 
-   
     
+    
+
+    
+
+
+
+    
+
+
+
+   
+      
+  
+
     buildList();
    
 }
 
+    
+    
+    
 
+
+   
 
 
 // -------------------- VIEW --------------------
@@ -401,28 +471,70 @@ function displayList(aStudent) {
 
 function displayStudent(student) {
     // create clone
+  
     const clone = document.querySelector("template#Studentz").content.cloneNode(true);
 
+        clone.querySelector("[data-field=star]").textContent = "Expel";
+   
     // set clone data
     clone.querySelector("[data-field=firstname]").textContent = "First Name : "+student.first;
     clone.querySelector("[data-field=secondname]").textContent = "Family Name : "+student.last;
-    clone.querySelector("[data-field=nick]").textContent = "Nickname: "+student.nickName;
+    clone.querySelector("[data-field=nick]").textContent = "Nick Name: "+student.nickName;
     clone.querySelector("[data-field=middle]").textContent = student.middle;
     clone.querySelector("[data-field=house]").textContent = "House: " +student.house;
+
+    clone.querySelector("[data-field=gender]").textContent = "Gender: " +student.gender;
   
-    // clone.querySelector("[data-field=Image]").src= student.image.src;
+    
 
 
     clone.querySelector("#studentImage").src = student.image.src;
 
 
+    clone.querySelector("[data-field=blood]").textContent = "Blood Type: " +student.blood;
+
+// console.log(allStudents);
 
 
 
-    // append clone to list
-    document.querySelector("#list tbody").appendChild(clone);
+clone.querySelector("[data-field=star]").addEventListener("click", () => expelClick(studentId));
+
+let studentId=allStudents.indexOf(student);     
+
+    function expelClick(studentId) {
+
     
+
+
+
+        allStudents.splice(studentId,1);
+      
+
+
+            buildList();    
+          }
+        
+
+         
+          
+
+
+    clone.querySelector("[data-field=winner]").dataset.winner = student.winner;
+    clone.querySelector("[data-field=winner]").addEventListener(`click`, clickWinner);
+    function clickWinner(){
+
+        if(student.winner === true){
+            student.winner = false;
+        } else {
+            tryToMakeAWinner(student);
+        }
+        buildList();
+    }
+    // append clone to list
+    document.querySelector("#list tbody").appendChild( clone );
 }
+
+
 
 
 
@@ -524,5 +636,18 @@ function makeWinner(student){
 
 
 
+
+
+
+const searchBar = document.getElementById('searchBar');
+searchBar.addEventListener('keyup', (event2) => {
+  const searchText = event2.target.value.toLowerCase();
+
+  const filteredStudents = allStudents.filter(student => {
+    const fullName2 = `${student.first}  ${student.middle}  ${student.last} ${student.nickName}`.toLowerCase();
+    return fullName2.includes(searchText);
+  });
+displayList(filteredStudents);
+});
 
 

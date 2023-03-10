@@ -53,7 +53,6 @@ function filterList(filteredList){
         filteredList = allAnimals.filter(function whichAnimal(animal){ //its a differnet way with closure
             if (animal.type === settings.filterBy ){
                 return true;
-
             }else{
                 return false;
             }
@@ -63,7 +62,7 @@ function filterList(filteredList){
         filteredList = allAnimals;
     }
     return filteredList;
-
+   
 }
   
 // ---------------------SORTING---------------------------
@@ -282,3 +281,29 @@ function makeWinner(animal){
     animal.winner = true;
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,27 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./chat.css"></link>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Animals (objects)</title>
+    <link rel="stylesheet" href="/chat.css"></link>
 
-</head>
-<body>
-    <div id="container">
-        <ul id="list">
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
-          <li>Item 5</li>
-        </ul>
-        <div id="buttons">
-          <button id="sort-asc">Sort Ascending</button>
-          <button id="sort-desc">Sort Descending</button>
-        </div>
-      </div>
+  </head>
+  <body class="items">
+   <div class="hat" ><img src="/harry.png" alt="" ></div>
+    <h1>Hogwarts School of Witchcraft <br>and Wizardry
+    </h1>
+
+
+    <input type="text" id="searchBar" placeholder="Search by name...">
+
+
+    <p>
+  <p1>Select House</p1>
+      <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
+      <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
       
-</body>
+      <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
+      <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
+      <button class="filter" data-action="filter" data-filter="*">All students</button>
+
+    </p>
+
+
+    <table id="list">
+      <thead>
+        <!-- <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">filter by</button>
+          <div id="myDropdown" class="dropdown-content">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+            <a href="#about">About</a>
+            <a href="#base">Base</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+            <a href="#custom">Custom</a>
+            <a href="#support">Support</a>
+            <a href="#tools">Tools</a>
+          </div>
+        </div> -->
+
+
+
+        <tr id="sorting">
+          <td>
+            <div class="custom-select" style="width:200px;">
+              <select>
+                <option value="0">Sort by:</option>
+                <option value="1">First Name</option>
+                <option value="2">Middle Name</option>
+                <option value="3">Family Name</option>
+                <option value="4">Nickname</option>
+                <option value="5">House</option>
+              </select>
+            </div>
+          </td>
+        </tr>
+        
+          <!-- <th data-action="sort" data-sort-direction="asc" data-sort="nickName">Photo</th>  -->
+          
+
+
+      
+      
+      
+      
+      
+  
+      
+      </thead>
+      <tbody>
+        <!-- animal template will be copied and inserted here -->
+        
+      </tbody>
+    </table>
+
+
+    
+    <main>
+    <template id="Studentz">
+      <tr>
+        <td data-field="image"><img id="studentImage" src="" /></td>
+        <td data-field="firstname">FirstName</td>
+        <td data-field="middle">Middlename</td>
+        <td data-field="secondname">SecondName</td>
+       
+        <td data-field="nick">Nickname</td>
+     
+        <td data-field="house">House</td>
+      </tr>
+    </template>
+  </main>
+  
+
+    <script src="chat.js"></script>
+  </body>
 </html>
+
