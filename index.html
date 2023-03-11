@@ -82,6 +82,9 @@
 
       <input type="text" id="searchBar" placeholder="Search by name...">
 
+      <div id="numberOfStudents"></div>
+
+      <div id="numberOfExpelledStudents"></div>
 
 
 
@@ -99,8 +102,8 @@
     <main>
     <template id="Studentz">
       <tr>
-        <td data-field="winner" data-winner="false"></td>
-        <td data-field="star">Expel</td>
+        <td data-field="expelled" data-expelled="false"></td>
+        <td data-field="expel">Expel</td>
         <td data-field="image"><img id="studentImage" src="" /></td>
         <td data-field="firstname">FirstName</td>
         <td data-field="middle">Middlename</td>
@@ -112,45 +115,44 @@
         <td data-field="blood">Blood Type</td>
       </tr>
     </template>
-  </main>
-  <div id="onlytwowinners" class="modal hide">
-    <div class="dialog">
-      <button class="closebutton">X</button>
-      <h1>Warning!</h1>
+
+<div id="onlytwowinners" class="modal hide">
+  <div class="dialog">
+    <button class="closebutton">X</button>
+    <h1>Warning!</h1>
+    <h2>
+      You can only have two winners!
+      <br />
+      Remove one, before you appoint more
+    </h2>
+    <p>
+      <button data-action="remove1">
+        remove <span class="animal1">NAME, the TYPE</span>
+      </button>
+    </p>
+    <p>
+      <button data-action="remove2">
+        remove <span class="animal2">NAME, the TYPE</span>
+      </button>
+    </p>
+  </div>
+</div>
+  <div id="warning" class="modal hide">
+    <div class="pop-up">
+      <button class="closeBtn"><img src="./close.svg"></button>
+      <h1>Waaaaaaiiiiiit!!!</h1>
       <h2>
-        You can only have two winners!
-        <br />
-        Remove one, before you appoint more
+     Are you sure you wanna send this poor bastard to the abyss?
       </h2>
       <p>
-        <button data-action="remove1">
-          remove <span class="animal1">NAME, the TYPE</span>
-        </button>
-      </p>
-      <p>
-        <button data-action="remove2">
-          remove <span class="animal2">NAME, the TYPE</span>
+        <button class="closeBtn1" data-action="remove1">
+          Send <span class="student"></span> to Hell
         </button>
       </p>
     </div>
   </div>
-
-  <div id="onlyonekind" class="modal hide">
-    <div class="dialog">
-      <button class="closebutton">X</button>
-      <h1>Warning!</h1>
-      <h2>
-        You can only have one winner of each type. <br />Remove the other if
-        you want to appoint a new one
-      </h2>
-      <p>
-        <button data-action="remove1">
-          remove <span class="animal1"></span>
-        </button>
-      </p>
-    </div>
-  </div>
-
-    <script src="app1.js"></script>
+</main>
+</body>
+    <script src="app2.js"></script>
   </body>
 </html>
