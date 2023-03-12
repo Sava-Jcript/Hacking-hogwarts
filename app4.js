@@ -1,3 +1,4 @@
+
 "use strict";
 
 window.addEventListener("DOMContentLoaded", start);
@@ -147,11 +148,11 @@ function sortList(sortedList){
 
 
 async function loadJSON() {
-    let [response1, response2] = await Promise.all([
+    let [response1, response2, response3] = await Promise.all([
         fetch("https://petlatkea.dk/2021/hogwarts/students.json").then(response => response.json()),
      
-  
-        fetch("https://petlatkea.dk/2021/hogwarts/families.json").then(response => response.json())
+      
+        fetch("https://petlatkea.dk/2021/hogwarts/families.json").then(response => response.json()),  fetch("./ali.json").then(response => response.json())
 
       ]);
       
@@ -159,7 +160,7 @@ async function loadJSON() {
       console.log("wtf");
 
 
-    prepareObjects(response1, response2);
+    prepareObjects(response1, response2, response3);
  
 
 
@@ -180,7 +181,7 @@ async function loadJSON() {
 
 
 
-function prepareObjects( jsonObject,jsonObject1 ) {
+function prepareObjects( jsonObject,jsonObject1, jsonObject2 ) {
     jsonObject.forEach( jsonObject => {
         const Student = Object.create(Students);
         // let text = jsonObject.fullname;
@@ -375,6 +376,9 @@ Student.image=imageSrc;
     Student.blood = bloodType;
 
 
+
+
+  
 
 allStudents.push(Student);
           
