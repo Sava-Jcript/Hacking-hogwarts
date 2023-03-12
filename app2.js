@@ -13,10 +13,11 @@ const Students = {
     middle: "", 
     nickName:"",
     house:"",
+    gender:"",
     image:"",
-    type: "",
+    prefect:false,
     expel: false,
-    winner: false,
+    inquisitional:false,
     blood:""
 }; 
 const settings = {
@@ -55,7 +56,7 @@ function selectFilter(event){
 
 function setFilter(filter1){
     settings.filterBy = filter1;
-    buildList();
+    CombineList();
  
 
 }
@@ -152,7 +153,7 @@ function sortClick(event){
 function setSort(sortBy, sortDir){
     settings.sortBy = sortBy;
     settings.sortDir = sortDir;
-    buildList();
+    CombineList();
     numberOfStudents()  ;
 }
 
@@ -213,7 +214,7 @@ async function loadJSON() {
 
 // function prepareObjects( inputData ) {
 //     allStudents = inputData.map(preapareObject);
-//     buildList();
+//     CombineList();
 // }
 
 
@@ -441,7 +442,7 @@ allStudents.push(Student);
       
   
 
-    buildList();
+    CombineList();
 
    
 }
@@ -456,7 +457,7 @@ allStudents.push(Student);
 
 // -------------------- VIEW --------------------
 
-function buildList() {
+function CombineList() {
     const currentList = filterList(allStudents);
     let sortedList = sortList(currentList);
 
@@ -520,7 +521,7 @@ clone.querySelector("[data-field=expel]").addEventListener("click", () => {
   
     const expelClickBtn = () => {
       allStudents.splice(studentId, 1);
-      buildList();
+      CombineList();
       // console.log(studentId);
 
       closeDialog();
@@ -545,7 +546,48 @@ clone.querySelector("[data-field=expel]").addEventListener("click", () => {
   });
   
 
-  
+
+
+
+
+
+
+
+
+
+
+  // -------------------new Shiiiiiiiiiiiiiiiiiiit ------------------
+
+
+
+// change prefect status (same logic as star)
+clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
+clone.querySelector("[data-field=prefect]").addEventListener(`click`, clickPrefect);
+function clickPrefect(){
+  // untoggle an student is always possible, but not toggle it (2 prefects for each category)
+  if(student.prefect === true){
+      student.prefect = false;
+  } else {
+      createPrefect(student);
+  }
+  CombineList();
+}
+
+
+
+
+clone.querySelector("[data-field=inquisitional]").dataset.prefect = student.prefect1;
+clone.querySelector("[data-field=inquisitional]").addEventListener(`click`, clickInqui);
+function clickInqui(){
+  // untoggle an student is always possible, but not toggle it (2 prefects for each category)
+  if(student.prefect === true){
+      student.prefect = false;
+  } else {
+      cretaeClickInqui(student);
+  }
+  CombineList();
+}
+
 
     document.querySelector("#list tbody").appendChild( clone );
 }
@@ -640,7 +682,7 @@ document.querySelector("#numberOfExpelledStudents").textContent = 'Expelled Stud
 
 
 
-// function buildList() {
+// function CombineList() {
 //   const currentList = filterList(allStudents);
 //   let sortedList = sortList(currentList);
 
@@ -649,3 +691,111 @@ document.querySelector("#numberOfExpelledStudents").textContent = 'Expelled Stud
 //   // numberOfStudents1();
 //   countExpelledStudents() ;
 //  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+function createPrefect(selectedStudent){
+  const prefects = allStudents.filter(student => student.prefect)
+  console.log(prefects);  
+  const numberOfPrefects = prefects.length;
+  const studentToRemove = prefects.filter(student => student.house === selectedStudent.house ).shift();
+
+  if (studentToRemove !== undefined){
+
+
+      removeOther(studentToRemove);
+  } else if (numberOfPrefects >= 4){
+
+      removeAorB(prefects[0], prefects[1]);
+  
+
+
+
+
+  }
+
+
+  createPrefect(selectedStudent);
+  function removeStudentz(studentToRemove){
+  // show name on button
+  document.querySelector("#onlytwoprefectsp button span").textContent =`${studentToRemove.first}`;
+
+
+  document.querySelector("#onlytwoprefects").classList.remove("hide");
+  document.querySelector("#onlytwoprefects .closebutton").addEventListener("click", closeDialog01);
+  document.querySelector("#onlytwoprefects p button").addEventListener("click", clickremoveStudentz);
+
+  function closeDialog01(){
+  document.querySelector("#onlytwoprefects").classList.add("hide");
+  document.querySelector("#onlytwoprefects .closebutton").removeEventListener("click", closeDialog01);
+  document.querySelector("#onlytwoprefects p button").removeEventListener("click", clickremoveStudentz);
+  }
+
+  function clickremoveStudentz(){
+  removePrefect(studentToRemove);
+  createPrefect(selectedStudent);
+  CombineList();
+  closeDialog01();
+  }
+  }
+  
+  function removeAorB(prefectA, prefectB){
+
+  document.querySelector("#onlytwoprefects [data-action=remove1] span").textContent =`${prefectA.first}`;
+  document.querySelector("#onlytwoprefects [data-action=remove2] span").textContent = `${prefectB.first}`;
+
+
+  document.querySelector("#onlytwoprefects").classList.remove("hide");
+  document.querySelector("#onlytwoprefects .closebutton").addEventListener("click", closeDialog01);
+  document.querySelector("#onlytwoprefects [data-action=remove1]").addEventListener("click", clickRemoveA);
+  document.querySelector("#onlytwoprefects [data-action=remove2]").addEventListener("click", clickRemoveB);
+
+  // if ignore, do nothing
+  function closeDialog01(){
+      document.querySelector("#onlytwoprefects").classList.add("hide");
+  document.querySelector("#onlytwoprefects .closebutton").removeEventListener("click", closeDialog01);
+  document.querySelector("#onlytwoprefects [data-action=remove1]").removeEventListener("click", clickRemoveA);
+  document.querySelector("#onlytwoprefects [data-action=remove2]").removeEventListener("click", clickRemoveB);
+  }
+
+  function clickRemoveA(){
+      removePrefect(prefectA);
+      createPrefect(selectedStudent);
+      CombineList();
+      closeDialog01();
+  }
+
+  function clickRemoveB(){
+  // else - if removeB
+  removePrefect(prefectB);
+  createPrefect(selectedStudent);
+  CombineList();
+  closeDialog01();
+  }
+   
+}
+
+function removePrefect(prefectstudent){
+
+  prefectstudent.prefect = false;
+}
+
+function createPrefect(student){
+  student.prefect = true;
+}
+}
+
+
+
+
+

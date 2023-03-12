@@ -80,11 +80,11 @@ gap: 2rem 7rem;
 
 tbody tr{
   display: grid;
-        grid-template-columns: 1.1fr 1.2fr 1.7fr;
-        grid-template-rows: 1.1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1.1fr 1.2fr ;
+        grid-template-rows: auto ;
 
         gap: 0% 2%;
-        grid-auto-flow: row;
+
         grid-template-areas:
           "image firstname middle"
           "image secondname ."
@@ -126,7 +126,8 @@ z-index: 90000;
 
 [data-field="middle"] {
     grid-area: 1 / 4 / 2 / 6;
-    margin-left: -8vw;
+    margin-left: -15vw;
+
 
 
 }
@@ -134,18 +135,21 @@ z-index: 90000;
 
 [data-field="secondname"] {
     grid-area: 2 / 2 / 3 / 4;
+  margin-top: 0.3vw;
+
 
 
 }
 
 [data-field="nick"] {
     grid-area:3 / 2 / 4 / 4;
-
+margin-top: -1.6vw;
 }
 
 
 [data-field="house"] {
     grid-area: 4 / 2 / 5 / 4;
+    margin-top: -0.7vw;
 
 }
 
@@ -158,10 +162,24 @@ z-index: 90000;
 
 [data-field="gender"] {
     grid-area: 5 / 2 / 5 / 4;
+  margin-top: 0.7vw;
+
+
+
+}
+
+[data-field="blood"] {
+  grid-area: 6 / 2 / 6 / 4;
+  margin-top: 0.7vw;
 
 }
 
 
+[data-field="prefect"] {
+  grid-area: 6 / 3 / 6 / 5;
+margin-left: 19vw;
+margin-top: -2vw;
+}
 
 
 
@@ -232,6 +250,9 @@ border-radius: 4px;
 
 
 
+/*--------------------  expel-------------------- */
+
+
 [data-action] {
     cursor: pointer;
   }
@@ -268,30 +289,147 @@ border-radius: 4px;
     border-collapse: collapse;
   }
 
-  /* ****** STAR ****** */
+  /* ****** expel ****** */
   
   [data-field="expel"] {
 
     cursor: pointer;
-margin-top: -2vw;
+margin-top: -1.9vw;
 font-weight: bold;
-margin-left: -2.7vw;
+margin-left: -2.9vw;
 font-family: 'Courier New', Courier, monospace;
 text-decoration:underline;
 position: relative;
+text-transform: capitalize;
+
   }
+
+
+
+
+
+
+
+
+/*--------------------  prefect-------------------- */
+
+td[data-field="prefect"]::after {
+  content: url("./prefect.png");
+  cursor: pointer;
+  margin-top: 16vw;
+  width: 1000px; /* set the width to 100 pixels */
+  height: auto; /* maintain aspect ratio */
+}
+
   
-  /* ****** TROPHY ****** */
-  td[data-field="winner"]::after {
-    background-color: "🏆";
-    cursor: pointer;
-  }
-  
-  td[data-field="winner"][data-winner="false"]::after {
-    background-color: "🏆";
+  td[data-field="prefect"][data-prefect="false"]::after {
+    content: url("./prefect.png");
+
+    margin-left: 1vw;
+    width: 1000px; 
+
     cursor: pointer;
     filter: grayscale(1);
+
+
   }
+
+
+
+
+
+
+
+
+  
+  
+  button[data-sort-direction="desc"]::after {
+    background-color: url("./prefect.png");
+    margin-left: 1vw;
+
+
+
+
+
+
+    cursor: pointer;
+  }
+  
+
+
+
+
+
+
+  td[data-field="inquisitional"]::after {
+    content: url("./inquisitional.png");
+    cursor: pointer;
+    margin-top: 16vw;
+
+    height: auto; /* maintain aspect ratio */
+  }
+  
+    
+    td[data-field="inquisitional"][data-inquisitional="false"]::after {
+      content: url("./inquisitional.png");
+  
+      margin-left: 1vw;
+
+  
+      cursor: pointer;
+      filter: grayscale(1);
+  
+  
+    }
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    button[data-sort-direction="desc"]::after {
+      background-color: url("./inquisitional.png");
+      margin-left: 1vw;
+  
+  
+  
+  
+  
+  
+      cursor: pointer;
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #list {
+    border-collapse: collapse;
+  }
+
+  /* ****** STAR ****** */
+  
+
+ 
   
   /* pop-up */
   
@@ -354,13 +492,61 @@ position: relative;
 
 
 
-  td[data-field="winner"]::after {
-    content: "🏆";
-    cursor: pointer;
-  }
+
+
   
-  td[data-field="winner"][data-winner="false"]::after {
-    content: "🏆";
-    cursor: pointer;
-    filter: grayscale(1);
-  }
+.modal1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.dialog {
+  box-shadow: 1px 1px 10px #333;
+  border-radius: 12px;
+  padding: 2em;
+  background-color: #ffe19e;
+  position: relative;
+  margin-left: 40vw;
+}
+
+button.closebutton {
+  position: absolute;
+  right: 1vw;
+  top: -2em;
+
+
+
+}
+
+.dialog h1 {
+
+  font-size: 4vw;
+  margin-top: 2vw;
+}
+
+.dialog h2 {
+  font-size: 1.3vw;
+  font-weight: lighter;
+ 
+
+
+}
+
+.hide{
+  display: none;
+}
+
+
+
+button.closebutton {margin-left: 11vw;
+margin-bottom: 2vw;
+
+}
