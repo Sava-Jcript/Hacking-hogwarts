@@ -1,38 +1,462 @@
-table {
-    text-align: left;
-    position: relative;
-    border-collapse: collapse; 
-    background-color: #f6f6f6;
-    margin-left: 20vw;
-  }/* Spacing */
-  td, th {
-    border: 1px solid #999;
-    padding: 20px;
-  }
-  th {
-    background: brown;
-    color: white;
-    border-radius: 0;
-    position: sticky;
-    top: 0;
-    padding: 10px;
-  }
-  .primary{
-    background-color: #000000
-  }
-  
-  tfoot > tr  {
-    background: black;
-    color: white;
-  }
-  tbody > tr:hover {
-    background-color: #ffc107;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Baumans&family=Bungee+Inline&family=Bungee+Shade&family=Cairo&family=Faster+One&family=Fugaz+One&family=Inter:wght@300;600;900&family=JetBrains+Mono:wght@100&family=Joan&family=Kdam+Thmor+Pro&family=Keania+One&family=Kumar+One&family=Major+Mono+Display&family=MedievalSharp&family=Space+Grotesk:wght@500&family=Syncopate:wght@700&family=Syne:wght@700;800&family=Tilt+Prism&display=swap');
 
-p,h1{
-  margin-left: 20vw;
+
+*{
+box-sizing: border-box;
+
 }
 
+
+.hat{
+
+  width:70%;
+  margin-left: 75vw;
+  transform: rotate(39deg);
+
+
+  margin-top: 19vw;
+z-index: -2;
+
+}
+
+#numberOfStudents{
+  font-family: inter;
+  font-size: 1rem;
+  margin-top: -5rem;
+  margin-bottom: 5rem;
+width: 13rem;
+height: 1.5rem;
+
+/* Auto layout */
+
+
+
+background: #bfffae;
+border: 2px solid #000000;
+box-shadow: -4px 4px 0px #000000;
+
+/* Inside auto layout */
+
+
+}
+
+h1 {
+    font-family: 'Tilt Prism', cursive;
+    font-size: 5.3vw;
+    text-align: center;
+    z-index: 90000;
+    margin-top: -16rem;
+}
+/* Styles for the table */
+
+#list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#list th,
+#list td {
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}
+
+#list th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inter;
+}
+
+#list tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+p {
+  font-family: inter;
+}
+/* Styles for the filter buttons */
+
+.filter {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #333;
+  background-color: #f2f2f2;
+  border: none;
+  cursor: pointer;
+}
+
+.filter.active {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Styles for the search bar */
+
+#searchBar {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  background-color: #be9eff;
+}
+
+/* Styles for the student template */
+
+#Studentz td {
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}
+
+#Studentz td:first-child {
+  padding-left: 0;
+}
+
+#Studentz td:last-child {
+  padding-right: 0;
+}
+
+#Studentz td[data-field="image"] {
+  width: 80px;
+}
+
+ td[data-field="image"] img {
+  max-width: 100%;
+  height: auto;
+  background: #FFFFFF;
+border: 4px solid #000000;
+box-shadow: 4px 4px 0px  #000000;
+border-radius: 30%;
+}
+
+/* Media queries for responsive design */
+
+@media screen and (max-width: 767px) {
+  /* Hide the sorting buttons */
+  #sorting button {
+    display: none;
+  }
+  
+  /* Show the sorting options in a dropdown */
+  #sorting select {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  /* Show the filter options in a dropdown */
+  .filter {
+    display: none;
+  }
+  
+  #list thead {
+    display: none;
+  }
+  
+  #list tbody tr {
+    display: block;
+    border: none;
+    margin-bottom: 10px;
+  }
+  
+  #list tbody td {
+    display: block;
+    text-align: left;
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    box-sizing: border-box;
+  }
+  
+  #list tbody td:before {
+    content: attr(data-field);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    padding: 10px;
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+}
+
+
+[data-field="expel"] {
+
+  cursor: pointer;
+margin-top: -1.9vw;
+font-weight: bold;
+margin-left: -2.9vw;
+font-family: inter;
+text-decoration:underline;
+position: relative;
+text-transform: capitalize;
+
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+
+  align-items: center;
+}
+
+.pop-up {
+  box-shadow: 1px 1px 10px #333;
+  border-radius: 12px;
+  padding: 2em;
+  background-color: #f2ff9e;
+  position: relative;
+  margin-left: 33vw;
+}
+
+button.closeBtn {
+ width: 20%;
+  margin-bottom: -9vw;
+  margin-left: 33vw;
+  margin-top: -1vw;
+
+}
+
+.pop-up h1 {
+  margin-top: 4vw;
+}
+
+.pop-up h2 {
+  font-size: 1.4vw;
+  font-weight: lighter;
+  margin-left: 4vw;
+
+}
+
+.hide{
+  display: none;
+}
+
+
+
+button.closeBtn1 {margin-left: 11vw;
+  font-size: 1.6vw;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.modal1 {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.6);
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.dialog {
+box-shadow: 1px 1px 10px #333;
+border-radius: 12px;
+padding: 2em;
+background-color: #ffe19e;
+position: relative;
+margin-left: 40vw;
+}
+
+button.closebutton {
+position: absolute;
+right: 1vw;
+top: -2em;
+
+
+
+}
+
+.dialog h1 {
+
+font-size: 4vw;
+margin-top: 2vw;
+}
+
+.dialog h2 {
+font-size: 1.3vw;
+font-weight: lighter;
+
+
+
+}
+
+.hide{
+display: none;
+}
+
+
+
+button.closebutton {margin-left: 11vw;
+margin-bottom: 2vw;
+
+}
+
+[data-field="expel"] {
+
+  cursor: pointer;
+margin-top: -1.9vw;
+font-weight: bold;
+margin-left: -2.9vw;
+font-family: inter; 
+text-decoration:underline;
+position: relative;
+text-transform: capitalize;
+
+}
+
+
+
+
+
+
+
+
+/*--------------------  prefect-------------------- */
+
+td[data-field="prefect"]::after {
+content: url("./images/prefect.png");
+cursor: pointer;
+margin-top: 16vw;
+width: 1000px; /* set the width to 100 pixels */
+height: auto; /* maintain aspect ratio */
+}
+
+
+td[data-field="prefect"][data-prefect="false"]::after {
+  content: url("./images/prefect.png");
+
+  margin-left: 1vw;
+  width: 1000px; 
+
+  cursor: pointer;
+  filter: grayscale(1);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+button[data-sort-direction="desc"]::after {
+  background-color: url("./images/prefect.png");
+  margin-left: 1vw;
+
+
+
+
+
+
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+td[data-field="inquisitional"]::after {
+  content: url("./images/inquisitional.png");
+  cursor: pointer;
+  margin-top: 6vw;
+
+  height: auto; /* maintain aspect ratio */
+}
+
+  
+  td[data-field="inquisitional"][data-inquisitional="false"]::after {
+    content: url("./images/inquisitional.png");
+
+    margin-left: 1vw;
+
+
+    cursor: pointer;
+    filter: grayscale(1);
+
+
+  }
+
+
+
+
+
+
+
+
+  
+  
+  button[data-sort-direction="desc"]::after {
+    background-color: url("./images/inquisitional.png");
+    margin-left: 1vw;
+
+
+
+
+
+
+    cursor: pointer;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#list {
+  border-collapse: collapse;
+}
 
 
 
@@ -44,95 +468,167 @@ p,h1{
   filter: grayscale(100%);
 }
 
-#sorting th.sortby {
-  text-decoration: underline;
-}
-
 #sorting th.sortby[data-sort-direction="asc"]::after {
-  content: "⇓";
+  content: url("./images/Polygon1.png");
 }
 
 #sorting th.sortby[data-sort-direction="desc"]::after {
-  content: "⇑";
+  content: url("./images/Polygon.png");
+}
+
+
+button[data-sort-direction="asc"]::after {
+  background-color: url("./images/Polygon.png");
+
+  margin-left: 1vw;
+
+
+  cursor: pointer;
+
+}
+
+button[data-sort-direction="desc"]::after {
+  background-color: url("./images/Polygon1.png");
+  margin-left: 1vw;
+
+
+
+
+
+
+  cursor: pointer;
 }
 
 #list {
   border-collapse: collapse;
 }
 
-#list tbody tr td {
-  padding: 4px;
+
+
+
+
+p1{
+  font-family: inter;
+  font-size: 1  rem;
+  margin-top: -5rem;
+  margin-bottom: 5rem;
+width: 13rem;
+height: 2.8rem;
+
+/* Auto layout */
+
+
+
+background: #bfffae;
+border: 2px solid #000000;
+box-shadow: -4px 4px 0px #000000;
+  
 }
 
-#list tbody tr:nth-child(odd) td {
-  background-color: rgb(243, 214, 139);
-  border-right: rgb(0, 0, 0) 1px dotted;
+
+button .filter{
+  margin-bottom: -40vw;
 }
 
-#list tbody tr:nth-child(even) td {
-  border-right: rgb(0, 0, 0) 1px dotted;
+
+input{
+  margin-top: 3vw;
+  margin-left: 75vw;
+
+font-size: 1.1vw;
+
+box-sizing: border-box;
+
+/* Auto layout */
+
+
+padding: 14px 40px;
+gap: 5px;
+
+cursor: pointer;
+
+background-color: #be9eff;
+border: 1px solid #000000;
+box-shadow: 4px 4px 0px #000000;
+border-radius: 4px;
+
 }
 
-/* ****** STAR ****** */
 
-[data-field="star"] {
-  text-align: center;
-  cursor: pointer;
-  min-width: 2em;
+
+.modal button{
+
+  font-family: 'MedievalSharp', cursive;
+font-size: 1.1vw;
+
+box-sizing: border-box;
+
+/* Auto layout */
+
+
+padding: 14px 30px;
+gap: 5px;
+
+cursor: pointer;
+
+background-color: #be9eff;
+border: 1px solid #000000;
+box-shadow: 4px 4px 0px #000000;
+border-radius: 4px;
+
+/* Inside auto layout */
+
 }
 
-/* ****** TROPHY ****** */
-td[data-field="winner"]::after {
-  content: "🏆";
-  cursor: pointer;
+
+ button[data-action="sort"][ data-sort="first"]{
+  font-size: 1.3rem;
+  background-color: #be9eff;
+  margin-left: 8.6rem;
+  width: 9%;
+  padding-bottom: 1.6rem;
 }
 
-td[data-field="winner"][data-winner="false"]::after {
-  content: "🏆";
-  cursor: pointer;
-  filter: grayscale(1);
+
+button[data-action="sort"][ data-sort="middle"]{
+  font-size: 1.3rem;
+  background-color: #be9eff;
+
+  width: 6.7%;
 }
 
-/* dialog */
+button[data-action="sort"][ data-sort="last"]{
+  font-size: 1.3rem;
+  background-color: #be9eff;
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 12.4%;
+  padding-bottom: 1.6rem;
 }
 
-.dialog {
-  box-shadow: 1px 1px 10px #333;
-  border-radius: 12px;
-  padding: 2em;
-  background-color: #ffe19e;
-  position: relative;
+button[data-action="sort"][ data-sort="nickName"]{
+  font-size: 1.3rem;
+  background-color: #be9eff;
+
+  width: 5.7%;
+}
+button[data-action="sort"][ data-sort="gender"]{
+  font-size: 1rem;
+  background-color: #be9eff;
+  padding-bottom: 1.6rem;
+  width: 4.8%;
 }
 
-button.closebutton {
-  position: absolute;
-  right: -1em;
-  top: -1em;
-  border-radius: 50%;
-  width: 2em;
-  height: 2em;
+button[data-action="sort"][ data-sort="house"]{
+  font-size: 1.3rem;
+  background-color: #be9eff;
+
+  width: 9.5%;
+  padding-bottom: 1.6rem;
 }
 
-.dialog h1 {
-  margin-top: 0;
-}
+button[data-action="sort"][ data-sort="blood"]{
+  font-size: 1.3rem;
+  background-color: #be9eff;
 
-.dialog h2 {
-  font-size: medium;
-  font-weight: lighter;
-}
-
-.hide{
-  display: none;
+  width: 5.4%;
 }

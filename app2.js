@@ -61,15 +61,6 @@ function setFilter(filter1){
 
 }
 
-// let house = jsonObject.house;
-//     let houseName = "";
-//     let houseTrim = house.trim();
-//     //* console.log(houseTrim);
-
-//     houseName = houseTrim.substring();
-    
-//     houseName=houseName.charAt(0).toUpperCase() + houseName.slice(1).toLowerCase(); 
-//     Student.house=houseName; 
 
 
 
@@ -92,38 +83,6 @@ function filterList(filteredList) {
 
 
 
-// function filterList(){
-//     let filteredList=allStudents.filter(isRaven); 
-// displayList(filteredList);
-// }
-
-// function isRaven (student){
-
-//     return student.house === "Slytherin"; 
-// }
-
-
-
-// function filterList(filteredList){
-
-//     if (settings.filterBy !== "*") {
-//         filteredList = allStudents.filter(function houseOfCards(Student){ //its a differnet way with closure
-            
-//             if (Student.House === settings.filterBy ){
-//                 return true;
-//             }else{
-//                 return false;
-//             }
-
-//         })
-//     }
-//     else {
-//         filteredList = allStudents;
-//     }
-//     return filteredList;
-
-// }
-
 
 // ---------------------SORTING---------------------------
 
@@ -131,21 +90,21 @@ function sortClick(event){
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
 
-    // find "old" sortby element, end remove .sortby
+
 
     const oldElement = document.querySelector(`[data-sort=${settings.sortBy}]`);
     oldElement.classList.remove("sortby");
 
-    // indicate active sort
+
     event.target.classList.add("sortby");
 
-    //toggle the direction
+
     if(sortDir === "asc"){
         event.target.dataset.sortDirection = "desc";
     }else{
         event.target.dataset.sortDirection = "asc";
     }
-    // console.log(`user selected ${sortBy} - ${sortDir}`)
+
     setSort(sortBy, sortDir);
 
 }
@@ -190,13 +149,16 @@ function sortList(sortedList){
 async function loadJSON() {
     let [response1, response2] = await Promise.all([
         fetch("https://petlatkea.dk/2021/hogwarts/students.json").then(response => response.json()),
+     
+  
         fetch("https://petlatkea.dk/2021/hogwarts/families.json").then(response => response.json())
+
       ]);
       
-  
+
       console.log("wtf");
 
-    // when loaded, prepare data objects
+
     prepareObjects(response1, response2);
  
 
@@ -212,10 +174,6 @@ async function loadJSON() {
 
 
 
-// function prepareObjects( inputData ) {
-//     allStudents = inputData.map(preapareObject);
-//     CombineList();
-// }
 
 
     
@@ -280,7 +238,7 @@ let last="";
   let lastName=""; 
   let lastnameTrim=""; 
 
-//   lastname= lastnameTrim.substring(lastnameTrim.lastIndexOf(" "), (fullnameTrim-lastnameTrim.length));
+
 
 
 lastnameTrim=fullName.trim();
@@ -325,7 +283,7 @@ Student.nickName=nick;
 let house = jsonObject.house;
     let houseName = "";
     let houseTrim = house.trim();
-    //* console.log(houseTrim);
+
 
     houseName = houseTrim.substring();
     
@@ -361,7 +319,7 @@ let image="";
    
    
     let lastnameL = lastName.toLowerCase();
-    // Takes the first letter of the firstname and makes it lower case
+
     
 if (lastName.includes(" ")) {
     
@@ -387,7 +345,7 @@ else if (firstnameResult.includes("Leanne")) {
     
 
   
-    imageSrc.src = "/fb.jpeg" ;
+    imageSrc.src = "/images/fb 1.png" ;
 }
 
 else{
@@ -487,13 +445,13 @@ function displayStudent(student) {
         clone.querySelector("[data-field=expel]").textContent = "Expel";
    
     // set clone data
-    clone.querySelector("[data-field=firstname]").textContent = "First Name : "+student.first;
-    clone.querySelector("[data-field=secondname]").textContent = "Family Name : "+student.last;
-    clone.querySelector("[data-field=nick]").textContent = "Nick Name: "+student.nickName;
+    clone.querySelector("[data-field=firstname]").textContent = student.first;
+    clone.querySelector("[data-field=secondname]").textContent = student.last;
+    clone.querySelector("[data-field=nick]").textContent = student.nickName;
     clone.querySelector("[data-field=middle]").textContent = student.middle;
-    clone.querySelector("[data-field=house]").textContent = "House: " +student.house;
+    clone.querySelector("[data-field=house]").textContent = student.house;
 
-    clone.querySelector("[data-field=gender]").textContent = "Gender: " +student.gender;
+    clone.querySelector("[data-field=gender]").textContent = student.gender;
   
     
 
@@ -501,7 +459,7 @@ function displayStudent(student) {
     clone.querySelector("#studentImage").src = student.image.src;
 
 
-    clone.querySelector("[data-field=blood]").textContent = "Blood Type: " +student.blood;
+    clone.querySelector("[data-field=blood]").textContent = student.blood;
 
 // console.log(allStudents);
 
@@ -576,17 +534,17 @@ function clickPrefect(){
 
 
 
-clone.querySelector("[data-field=inquisitional]").dataset.prefect = student.prefect1;
-clone.querySelector("[data-field=inquisitional]").addEventListener(`click`, clickInqui);
-function clickInqui(){
-  // untoggle an student is always possible, but not toggle it (2 prefects for each category)
-  if(student.prefect === true){
-      student.prefect = false;
-  } else {
-      cretaeClickInqui(student);
-  }
-  CombineList();
-}
+// clone.querySelector("[data-field=inquisitional]").dataset.prefect = student.inquisitional;
+// clone.querySelector("[data-field=inquisitional]").addEventListener(`click`, clickInqui);
+// function clickInqui(){
+//   // untoggle an student is always possible, but not toggle it (2 prefects for each category)
+//   if(student.inquisitional === true){
+//       student.inquisitional = false;
+//   } else {
+//       cretaeClickInqui(student);
+//   }
+//   CombineList();
+// }
 
 
     document.querySelector("#list tbody").appendChild( clone );
@@ -618,10 +576,6 @@ displayList(filteredStudents);
 
 
 
-// function numberOfExpelledStudents(){
-//   let resultz= document.querySelector('#numberOfExpelledStudents').textContent="Number Of Expelled Students:" + allStudents.length;
-// }
-
 
 
 function numberOfStudents() {
@@ -635,30 +589,6 @@ function numberOfStudents() {
   document.querySelector('#numberOfStudents').textContent = "Number Of Students:" + length1;
 }
 
-
-
-// function numberOfExpelledStudents() {
-//   let expelledStudents = allStudents.filter(student => student.expelled === true);
-
-//   let sortedExpelledStudents = expelledStudents.sort((a, b) => a.name.localeCompare(b.name));
-//   let length2 = sortedExpelledStudents.length;
-//   document.querySelector('#numberOfExpelledStudents').textContent = "Number Of Expelled Students:" + length2;
-// }
-
-
-
-
-
-// function numberOfStudents1() {
-
-//   let sortedStudents = sortList(allStudents.slice());
-  
-
-//   let length1 = sortedStudents.length;
-  
-
-//   document.querySelector('#numberOfExpelledStudents').textContent = "Number Of Expelled Students:" + length1;
-// }
 
 
 
@@ -682,18 +612,6 @@ document.querySelector("#numberOfExpelledStudents").textContent = 'Expelled Stud
 
 
 
-// function CombineList() {
-//   const currentList = filterList(allStudents);
-//   let sortedList = sortList(currentList);
-
-//   displayList(sortedList);
-//   numberOfStudents();
-//   // numberOfStudents1();
-//   countExpelledStudents() ;
-//  }
-
-
-
 
 
 
@@ -713,8 +631,8 @@ function createPrefect(selectedStudent){
   if (studentToRemove !== undefined){
 
 
-      removeOther(studentToRemove);
-  } else if (numberOfPrefects >= 4){
+    removeStudentz(studentToRemove);
+  } else if (numberOfPrefects >= 2){
 
       removeAorB(prefects[0], prefects[1]);
   
@@ -722,10 +640,12 @@ function createPrefect(selectedStudent){
 
 
 
+    } else {
+      createPrefect(selectedStudent);
   }
 
 
-  createPrefect(selectedStudent);
+
   function removeStudentz(studentToRemove){
   // show name on button
   document.querySelector("#onlytwoprefectsp button span").textContent =`${studentToRemove.first}`;
@@ -794,7 +714,6 @@ function createPrefect(student){
   student.prefect = true;
 }
 }
-
 
 
 

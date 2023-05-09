@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Hogwarts School of Witchcraft
       and Wizardry</title>
-    <link rel="stylesheet" href="./style1.css"></link>
+    <link rel="stylesheet" href="./style.css"></link>
 
   </head>
   <body class="items">
-   <div class="hat" ><img src="/harry.png" alt="" ></div>
+   <div class="hat" ><img src="/images/harry.png" width="20%" height="30%" alt="" ></div>
     <h1>Hogwarts School of Witchcraft <br>and Wizardry
     </h1>
 
@@ -31,8 +31,15 @@
 
     </p>
 
+    <input type="text" id="searchBar" placeholder="Search by name...">
+
+    <div id="numberOfStudents"></div>
+
 
     <table id="list">
+
+
+
       <thead>
         <!-- <div class="dropdown">
           <button onclick="myFunction()" class="dropbtn">filter by</button>
@@ -49,21 +56,21 @@
         </div> -->
         <tr id="sorting">
 
-<p1>Sort Alphabetically  :  </p1>
 
-          <!-- <th data-action="sort"   data-sort-direction="asc" data-sort="nickName">Photo</th>  -->
-          <button th data-action="sort" data-sort-direction="asc" data-sort="first">First Name</th></button>
-          <button th data-action="sort" data-sort-direction="asc" data-sort="middle">Middle Name</th></button>
-            <button th data-action="sort" data-sort-direction="asc" data-sort="last">Family Name</th></button>
+
+          <!-- <th data-action="sort"   data-sort-direction="asc" data-sort="nickName">Photo</th>  --> <th data-action="sort" data-sort-direction="asc" data-sort="first"></th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="first">First Name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="middle">Middle Name</th>
+            <th data-action="sort" data-sort-direction="asc" data-sort="last">Family Name</th>
        
-              <button th data-action="sort" data-sort-direction="asc" data-sort="nickName">Nickname</th></button>
+              <th data-action="sort" data-sort-direction="asc" data-sort="nickName">Nick Name</th>
 
 
-              <button th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th></button>
+              <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
 
-      
+              <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
 
-          <button th data-action="sort" data-sort-direction="asc" data-sort="blood">Blood Type</th></button>
+          <th data-action="sort" data-sort-direction="asc" data-sort="blood">Blood Type</th>
         </tr>
       
       
@@ -81,19 +88,13 @@
 
 
 
-      <input type="text" id="searchBar" placeholder="Search by name...">
-
-      <div id="numberOfStudents"></div>
-
-      <div id="numberOfExpelledStudents"></div>
-
 
 
       
 
       <tbody>
 
-        <!-- animal template will be copied and inserted here -->
+        <!-- student template will be copied and inserted here -->
         
       </tbody>
     </table>
@@ -108,13 +109,7 @@
 
 
 
-        <td data-field="prefect" data-prefect="false"></td>
-
-        <td data-field="inquisitional" data-inquisitional="false"></td>
-
-
-
-        <td data-field="expel">Expel</td>
+        
         <td data-field="image"><img id="studentImage" src="" /></td>
         <td data-field="firstname">FirstName</td>
         <td data-field="middle">Middlename</td>
@@ -124,8 +119,19 @@
         <td data-field="gender">Gender</td>
         <td data-field="house">House</td>
         <td data-field="blood">Blood Type</td>
+        <td data-field="prefect" data-prefect="false"></td>
+
+        <!-- <td data-field="inquisitional" data-inquisitional="false"></td> -->
+
+
+
+        <td data-field="expel">Expel</td>
       </tr>
     </template>
+
+
+
+
 
 
 
@@ -140,12 +146,12 @@ Downgrade one of the other two bastards.
         </h2>
         <p>
           <button data-action="remove1">
-            remove <span class="animal1"></span>
+            remove <span class="student1"></span>
           </button>
         </p>
         <p>
           <button data-action="remove2">
-            remove <span class="animal2"></span>
+            remove <span class="student2"></span>
           </button>
         </p>
       </div>
@@ -154,7 +160,7 @@ Downgrade one of the other two bastards.
 
     <div id="only-pure-blood" class="modal hide">
       <div class="dialog">
-        <button class="closebutton"><img src="./close.svg"></button>
+        <button class="closebutton"><img src="./images/close.svg"></button>
         <h1>Heeellllo!</h1>
         <h2>
        You can only assign the Inquisitorial Squad
@@ -162,7 +168,7 @@ Downgrade one of the other two bastards.
         </h2>
         <p>
           <button data-action="remove1">
-            remove <span class="animal1"></span>
+            remove <span class="student1"></span>
           </button>
         </p>
       </div>
@@ -173,7 +179,7 @@ Downgrade one of the other two bastards.
 
   <div id="warning" class="modal hide">
     <div class="pop-up">
-      <button class="closeBtn"><img src="./close.svg"></button>
+      <button class="closeBtn"><img src="./images/close.svg"></button>
       <h1>Waaaaaaiiiiiit!!!</h1>
       <h2>
      Are you sure you wanna send this poor bastard to the abyss?
@@ -188,5 +194,6 @@ Downgrade one of the other two bastards.
 </main>
 </body>
     <script src="app2.js"></script>
+
   </body>
 </html>
